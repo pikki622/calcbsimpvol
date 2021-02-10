@@ -5,7 +5,9 @@ a.bat
 a27.bat
 .env
 .venv/
+venv/
 commands.sh
+todo.txt
 
 # Created by https://www.gitignore.io/api/python,matlab,pycharm,windows
 # Edit at https://www.gitignore.io/?templates=python,matlab,pycharm,windows

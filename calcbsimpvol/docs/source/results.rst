@@ -101,7 +101,7 @@ About he puts with ``iVol ~ 0.5``? Tell us.
 
 
 ``calcBSImvol`` vs ``bsimpv()`` vs ``calc_ivol``
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
 Fig. 5 shows that  ``calcBSImvol()`` offers an extended calculation range compared to
 ``bsimpv()``. The ``NaN`` values returned from ``bsimpv()`` were set to ``zero`` in order to create Fig. 5.
 
