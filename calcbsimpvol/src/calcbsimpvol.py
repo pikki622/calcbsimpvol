@@ -292,7 +292,7 @@ def calcbsimpvol(arg_dict):
         e[C] = s['obj']
 
         C = absolute(e) > tolerance
-        k = k + 1
+        k += 1
 
     sigma[C] = nan
     sigma = reshape(sigma, (g, h))

@@ -56,18 +56,16 @@ def load_data(file_path):
             raise ValueError('expected archive to have only one file')
         if file_names[0] not in file_path:
             raise ValueError('expected file name to be part of the archive name')
-        data_string = zf.read(file_names[0])
-        return data_string
+        return zf.read(file_names[0])
 
 
 def calc(file_path, steps=1, do_return=False):
     data_string = load_data(file_path)
     data = json.loads(data_string)
-    container = dict()
+    container = {}
     for day in data:
         m = data[day]
-        c = dict()
-        c['cp'] = np.asarray(m['cp'])
+        c = {'cp': np.asarray(m['cp'])}
         c['P'] = np.asarray(m['P'])
         c['S'] = np.asarray(m['S'][0])
         c['K'] = np.asarray(m['K'])
@@ -80,12 +78,12 @@ def calc(file_path, steps=1, do_return=False):
             c[key] = np.reshape(c[key], (np.size(c[key]), 1))
             container[day] = c.copy()
 
-    elapsed = dict()
-    array_size = dict()
+    elapsed = {}
+    array_size = {}
 
     for _step in range(steps):
-        elapsed[_step] = dict()
-        array_size[_step] = dict()
+        elapsed[_step] = {}
+        array_size[_step] = {}
         for day in container:
             t_zero = time()
             if _step == 0:
@@ -105,16 +103,20 @@ def calc(file_path, steps=1, do_return=False):
     _total_elapsed = np.sum(_total_elapsed_array)
     _min = np.min(_total_elapsed_array)  # s
 
-    print('steps {}'.format(steps))
-    print('days per step: {}'.format(_days))
-    print('total elapsed time: {} ms'.format(np.round(_total_elapsed * 1000)))
-    print('total options: {} '.format(_options_per_step * steps))
-    print('(best) average time per option: {} µs'.format(np.round((_min / _options_per_step) * 1000 * 1000 )))
+    print(f'steps {steps}')
+    print(f'days per step: {_days}')
+    print(f'total elapsed time: {np.round(_total_elapsed * 1000)} ms')
+    print(f'total options: {_options_per_step * steps} ')
+    print(
+        f'(best) average time per option: {np.round(_min / _options_per_step * 1000 * 1000)} µs'
+    )
     print('')
-    print('options per step: {}'.format(_options_per_step))
-    print('minimum elapsed time for 1 step: {} ms'.format(np.round(_min * 1000)))
+    print(f'options per step: {_options_per_step}')
+    print(f'minimum elapsed time for 1 step: {np.round(_min * 1000)} ms')
     print('')
-    print('average time per option: {} µs'.format(np.round((_total_elapsed/(steps * _options_per_step)) * 1000 * 1000)))
+    print(
+        f'average time per option: {np.round(_total_elapsed / (steps * _options_per_step) * 1000 * 1000)} µs'
+    )
     if do_return:
         return container
 

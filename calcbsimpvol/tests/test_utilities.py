@@ -26,16 +26,12 @@ from scipy.stats import norm
 from calcbsimpvol.src import _fcnN, _fcnn
 
 
-@pytest.mark.parametrize(
-    'x', [point / 10 for point in range(-5 * 10, -5 * 10, 1)]
-)
+@pytest.mark.parametrize('x', [point / 10 for point in range(-5 * 10, -5 * 10)])
 def test__fcnN(x):
     assert _fcnN(x) == pytest.approx(norm.cdf(x), rel=0.000000000001)
 
 
-@pytest.mark.parametrize(
-    'x', [point / 10 for point in range(-5 * 10, 5 * 10, 1)]
-)
+@pytest.mark.parametrize('x', [point / 10 for point in range(-5 * 10, 5 * 10)])
 def test__fcnn(x):
     assert _fcnn(x) == pytest.approx(norm.pdf(x), rel=0.000000000001)
 
